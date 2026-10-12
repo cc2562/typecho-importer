@@ -1,0 +1,5 @@
+# 统一以 LF 入库，避免 Windows 上 checkout 成 CRLF 后「重新构建一次就变脏」。
+* text=auto eol=lf
+
+# dist/ 由 tsc 直接产出，保持字节原样，不做任何换行转换。
+dist/** -text
