@@ -1,0 +1,1 @@
+{"version":3,"file":"php-serialize.d.ts","sourceRoot":"","sources":["../src/php-serialize.ts"],"names":[],"mappings":"AAAA;;;;;;;;;GASG;AAMH,8BAA8B;AAC9B,qBAAa,iBAAkB,SAAQ,KAAK;CAAG;AAE/C;;;;GAIG;AACH,wBAAgB,iBAAiB,CAAC,KAAK,EAAE,MAAM,GAAG,OAAO,CAMxD;AAED,2DAA2D;AAC3D,wBAAgB,oBAAoB,CAAC,KAAK,EAAE,MAAM,GAAG,OAAO,GAAG,SAAS,CAMvE"}

@@ -1,0 +1,14 @@
+node_modules/
+*.tsbuildinfo
+
+# 编辑器与系统
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# 本插件以 **git 方式分发**：安装器会强制校验 manifest.entry（./dist/index.js）必须存在，
+# 而本包的 dev 依赖使用 workspace: 协议会让安装器跳过依赖安装与构建，
+# 因此构建产物必须随仓库提交 —— 覆盖主仓库通用的 dist/ 忽略规则。
+!dist/

@@ -1,0 +1,29 @@
+/*
+ * 自带完整编译选项（不 extends 主仓库的 tsconfig.base.json）：
+ * 本目录未来会作为独立 GitHub 仓库发布，脱离主仓库后仍需能 `tsc -p tsconfig.json` 构建。
+ */
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "strict": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmitOnError": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts"]
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "ccrice.typecho-importer",
+  "name": "Typecho 导入",
+  "description": "把 Typecho 导出的 .dat 备份文件迁移到本系统：上传备份、预览统计、按类型导入文章/页面/分类标签/评论/附件，并保留原始时间线。",
+  "version": "1.0.0",
+  "apiVersion": "^1.0.0",
+  "author": "ccrice",
+  "license": "MIT",
+  "entry": "./dist/index.js",
+  "requires": {
+    "content.posts@1": "^1.0.0",
+    "content.taxonomy@1": "^1.0.0"
+  },
+  "capabilities": [
+    "database:own",
+    "services:consume",
+    "routes:admin",
+    "admin:menu"
+  ],
+  "migrations": "./migrations",
+  "admin": {
+    "pages": [
+      {
+        "id": "typecho.importer",
+        "label": "Typecho 导入",
+        "path": "/typecho-import",
+        "icon": "Upload",
+        "order": 55,
+        "permission": "post.write",
+        "entry": "./admin/main.js"
+      }
+    ]
+  },
+  "settingsSchema": {
+    "general": {
+      "label": { "zh-CN": "导入默认值", "en": "Import defaults" },
+      "description": {
+        "zh-CN": "后台导入界面每次打开时的默认值，界面上仍可临时调整。",
+        "en": "Defaults used when the import page is opened; still adjustable per run."
+      },
+      "fields": {
+        "excerptLength": {
+          "type": "number",
+          "label": { "zh-CN": "摘要长度（字）", "en": "Excerpt length" },
+          "description": {
+            "zh-CN": "Typecho 没有摘要字段，导入时按此长度从正文生成。",
+            "en": "Typecho has no excerpt field; it is generated from the content."
+          },
+          "default": 120,
+          "min": 20,
+          "max": 500
+        },
+        "importComments": {
+          "type": "boolean",
+          "label": { "zh-CN": "默认勾选评论", "en": "Import comments by default" },
+          "description": {
+            "zh-CN": "评论以原始作者、时间与审核状态写入；含 [secret] 的私密评论会转为待审核。",
+            "en": "Comments keep author, time and moderation state; secret ones become pending."
+          },
+          "default": true
+        }
+      }
+    },
+    "attachments": {
+      "label": { "zh-CN": "附件", "en": "Attachments" },
+      "description": {
+        "zh-CN": "备份里只有附件的路径，不含文件本身。留空源站地址则跳过附件、正文保留原链接。",
+        "en": "Backups contain attachment paths only. Leave the origin blank to skip them."
+      },
+      "fields": {
+        "originBaseUrl": {
+          "type": "url",
+          "label": { "zh-CN": "源站根地址", "en": "Origin site base URL" },
+          "description": {
+            "zh-CN": "例如 https://world.ccrice.com ，用于下载 /usr/uploads/... 下的附件。",
+            "en": "For example https://example.com, used to fetch /usr/uploads/... files."
+          },
+          "placeholder": "https://example.com",
+          "default": "",
+          "maxLength": 300
+        },
+        "downloadTimeoutMs": {
+          "type": "number",
+          "label": { "zh-CN": "单个附件下载超时（毫秒）", "en": "Download timeout (ms)" },
+          "default": 15000,
+          "min": 1000,
+          "max": 120000
+        },
+        "maxAttachmentBytes": {
+          "type": "number",
+          "label": { "zh-CN": "单个附件大小上限（字节）", "en": "Max attachment size (bytes)" },
+          "default": 8388608,
+          "min": 1024,
+          "max": 67108864
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "@ccrice/ricenote-plugin-typecho-importer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "RiceNote 第三方插件：导入 Typecho .dat 备份",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "admin",
+    "migrations",
+    "manifest.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "@ricenote/plugin-sdk": "^0.5.0",
+    "@ricenote/shared": "^0.5.0"
+  },
+  "peerDependenciesMeta": {
+    "@ricenote/plugin-sdk": { "optional": true },
+    "@ricenote/shared": { "optional": true }
+  },
+  "devDependencies": {
+    "@ricenote/plugin-sdk": "workspace:*",
+    "@ricenote/shared": "workspace:*",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
