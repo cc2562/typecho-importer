@@ -3,7 +3,7 @@
   "id": "ccrice.typecho-importer",
   "name": "Typecho 导入",
   "description": "把 Typecho 导出的 .dat 备份文件迁移到本系统：上传备份、预览统计、按类型导入文章/页面/分类标签/评论/附件，并保留原始时间线。",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "apiVersion": "^1.0.0",
   "author": "ccrice",
   "license": "MIT",

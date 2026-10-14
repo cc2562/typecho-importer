@@ -4,6 +4,7 @@
  * Typecho 的约定：正文以 `<!--markdown-->` 开头表示内容是 Markdown，
  * 其余（含从 WordPress 迁移过来的 `<!-- wp:xxx -->` 块）都是 HTML。
  */
+import { stripShortcodeMarks } from '@ricenote/shared';
 import { htmlToMarkdown } from './html-to-markdown.js';
 /** Typecho 标记"本文为 Markdown"的注释。 */
 export const MARKDOWN_MARKER = '<!--markdown-->';
@@ -71,11 +72,22 @@ export function buildExcerpt(markdown, length) {
 }
 /** 把 Markdown 压成连续纯文本（用于摘要与列表预览）。 */
 export function toPlainText(markdown) {
-    return markdown
+    /*
+     * 先干掉代码块、行内代码与链接/图片，再交给 `stripShortcodeMarks`。
+     *
+     * 顺序不能反：短代码剥离靠"前置字符是 `!` 或 `\\`、后跟 `(`"这几个守卫躲开
+     * Markdown 图片与行内链接，内核的 `markdownToPlainText` 同样是这个次序。
+     *
+     * 为什么要剥离：内核自 0.7.0 起规定列表摘要、搜索摘要、SEO 描述与订阅源
+     * **只保留短代码内部文字**（不该出现 `[warn]` 字样），但**不改写正文存储** ——
+     * 摘要必须与内核同一口径，否则同一条内容在列表页与详情页的文案会对不上。
+     */
+    const withoutMarkup = markdown
         .replace(/```[\s\S]*?```/g, ' ')
         .replace(/`([^`]*)`/g, '$1')
         .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
-        .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+        .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
+    return stripShortcodeMarks(withoutMarkup)
         .replace(/^\s{0,3}#{1,6}\s+/gm, '')
         .replace(/^\s{0,3}>\s?/gm, '')
         .replace(/^\s*([-*+]|\d+\.)\s+/gm, '')

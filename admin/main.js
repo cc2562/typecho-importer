@@ -379,7 +379,7 @@ export default defineAdminPage({
       formatBytes,
       formatTime,
       statusLabel: (status) => STATUS_LABELS[status] ?? status,
-      statusTone: (status) => STATUS_TONES[status] ?? 'secondary'
+      statusTone: (status) => STATUS_TONES[status] ?? 'muted'
     };
   },
 
